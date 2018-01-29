@@ -1,5 +1,4 @@
 <?php
-	//ini_set('display_errors','On');
 	
 	$file = 'todo.txt';
 	$content = file($file);
@@ -16,17 +15,17 @@
 	else if($_GET['add'] == 'OK' && !empty($_GET['what']))
 	{
 		$current = file_get_contents($file);
-		$current .= $_GET['what']."\n";
+		$current .= $_GET['what']."\n";//записываем в конец выбранное значение
 		file_put_contents($file, $current);
-		$content[count($content)] = $_GET['what']."\n";
+		$content[count($content)] = $_GET['what']."\n";//добавляем новое значение в массив
 		echo "<font size = \"4pt\"> <font color = \"#DC143C	\"> Добавлено </font> </font>";
 	}
 	else if($_GET['del'] == 'OK')
 	{
 		$num = $_GET['num'];
 		echo "<font size = \"4pt\"> <font color = \"#DC143C	\"> Удалено: $content[$num]</font> </font>"; 
-		unset($content[$num]);
-		file_put_contents($file, implode("", $content));
+		unset($content[$num]); //удаляем элемент массива
+		file_put_contents($file, implode("", $content)); //перезаписываем файл без удаленного элемента
 	}
 ?>
 <!DOCTYPE html>
@@ -61,11 +60,11 @@
 <body text="#000080" bgcolor = "#B0C4DE">
 	<form method="GET">
 		<p> Добавить: <input name="what" class = "s"></p>
-		<input type="submit" class = "b" name="add" value="OK" />
+		<input type="submit" class = "b" name="add" value="OK" /> 
 	</form>
 	<form method="GET">
 		<p>Посмотреть</p>
-		<input type="submit" class ="b" name="show" value="OK" />
+		<input type="submit" class ="b" name="show" value="OK" /> 
 	</form>
 	<form method="GET">
 		<p>Удалить: </p>
